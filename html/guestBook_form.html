@@ -1,0 +1,8 @@
+<form id="guestBook" action="" method="POST">
+	<input type="text" id="name" name="name" placeholder="Ваше имя *" value="" />
+	<input type="text" id="email" name="email" placeholder="Ваш e-mail *" value="" />
+	<input type="text" id="site" name="site" placeholder="Ваш сайт" value="" />
+	<textarea id="msg" name="msg" placeholder="Введите текст сообщения *"></textarea>
+	<input type="hidden" name="check" value="<?php echo md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']); ?>" />
+	<input type="button" onclick="sendGuestBook();" value="Отправить" />
+</form>
