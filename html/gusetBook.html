@@ -1,0 +1,42 @@
+<section class="cont" id="form">
+	<div id="infoCont"></div>
+	<?php include "guestBook_form.html"; ?>
+</section>
+
+<section class="cont" id="message">
+	<div class="sort">
+		<span class="title">Сортировать по:</span>
+		<span class="sortButt" id="date" data-id="up">Дате</span>
+		<span class="sortButt" id="name" data-id="up">Имени</span>
+		<span class="sortButt" id="mail" data-id="up">E-mail</span>
+	</div>
+	<div class="lastMsg">
+		<?php if ($msgs): ?>
+		<?php foreach($msgs as $msg): ?>
+		<?php include "guestBook_rowMessage.html"; ?>
+		<?php endforeach; ?>
+		<?php else: ?>
+		<div class="first">Будьте первым, оставьте своё сообщение!</div>
+		<?php endif; ?>
+	</div>
+	<?php if ($pages > 1): ?>
+	<div class="navPage">
+		<?php for ($i = 1; $i <= $pages; $i++): ?>
+		<?php if ($pages > 5): ?>
+		<?php if ($i == 1 AND $thisPage+2 > $i AND $thisPage > 3): ?>
+		<a href="/<?php echo $i; ?>" class="pages<?php if ($i == $thisPage) echo ' this'; ?>"><?php echo $i; ?></a><span>...</span>
+		<?php endif; ?>
+		<?php if (($i <= $thisPage+2 AND $i >= $thisPage-2) OR $i > $pages): ?>
+		<a href="/<?php echo $i; ?>" class="pages<?php if ($i == $thisPage) echo ' this'; ?>"><?php echo $i; ?></a>
+		<?php endif; ?>
+		<?php if ($i == $pages AND $thisPage < $pages-2): ?>
+		<span>...</span><a href="/<?php echo $i; ?>" class="pages<?php if ($i == $thisPage) echo ' this'; ?>"><?php echo $i; ?></a>
+		<?php endif; ?>
+		<?php else: ?>
+		<a href="/<?php echo $i; ?>" class="pages<?php if ($i == $thisPage) echo ' this'; ?>"><?php echo $i; ?></a>
+		<?php endif; ?>
+		<?php endfor; ?>
+	</div>
+	<?php endif; ?>
+
+</section>
