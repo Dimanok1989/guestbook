@@ -1,0 +1,25 @@
+RewriteEngine On
+
+Options +FollowSymlinks
+
+RewriteCond %{REQUEST_URI} !\?
+RewriteCond %{REQUEST_URI} !\&
+RewriteCond %{REQUEST_URI} !\=
+RewriteCond %{REQUEST_URI} !\.
+RewriteCond %{REQUEST_URI} ![^\/]$
+RewriteRule ^(.*)\/$ /$1 [R=301,L]
+
+RewriteRule ^([^/\.]+)$ /index.php?p=$1 [L]
+RewriteRule ^([^/\.]+)/([^/\.]+)$ /index.php?p=$1&pa=$2 [L]
+
+RewriteRule .cfg [R=404]
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+<FilesMatch ".(htaccess|htpasswd|ini)$">
+ Order Allow,Deny
+ Deny from all
+</FilesMatch>
+
+RewriteRule ^.cfg$ [L,R=404]
