@@ -1,5 +1,7 @@
-<?php	
+<?php
+
 	$conf = parse_ini_file(".cfg", true); // Подключение настроек проекта
+
 	require_once ("lib/function.php"); // Общие функции
 
 	$mysql = mysqli_connect(
@@ -8,11 +10,16 @@
 		$conf['mysql']['dbpass'],
 		$conf['mysql']['dbname']
 	);
-	if (!$mysql) exit("Ошибка подключения к базе данных");
-	else mysqli_query($mysql, 'SET NAMES ' . $conf['mysql']['dbcharset']);
+
+	if (!$mysql) {
+		exit("Ошибка подключения к базе данных");
+    } else {
+		mysqli_query($mysql, 'SET NAMES ' . $conf['mysql']['dbcharset']);
+    }
 
 	// Проверка таблицы
-	function checkTable($check) {
+	function checkTable($check)
+	{
 		global $mysql;
 		$sql = "SHOW TABLES";
 		$result = [];
